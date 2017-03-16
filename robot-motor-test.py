@@ -10,7 +10,7 @@ def init():
     gpio.setup(15, gpio.OUT)
 
 '''Move 4 wheels turn forward'''
-def forward(tf):
+def reverse(tf):
     init()
     gpio.output(7, False)
     gpio.output(11, True)
@@ -20,7 +20,7 @@ def forward(tf):
     gpio.cleanup()
 
 '''Move 4 wheels turn backward'''
-def reverse(tf):
+def forward(tf):
     init()
     gpio.output(7, True)
     gpio.output(11, False)
@@ -29,5 +29,5 @@ def reverse(tf):
     time.sleep(tf)
     gpio.cleanup()
     
-forward(0.5)
-reverse(0.5)
+forward(3)
+reverse(3)
