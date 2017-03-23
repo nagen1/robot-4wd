@@ -29,5 +29,5 @@ def forward(tf):
     time.sleep(tf)
     gpio.cleanup()
     
-forward(3)
-reverse(3)
+forward(1)
+reverse(1)

@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import sys
 import time
-import tkinter as tk
+import curses
 
 '''Config GPIO Ports'''
 a = 7
@@ -75,15 +75,16 @@ def pivot_right(tf):
     gpio.output(d, True)
     time.sleep(tf)
     gpio.cleanup()
+    
 
-  
-'''use Keyboard to rover to move'''
-def control_rover(event):
+curses.initscr()
+key_press = ''
+#sleep_time = 0.3
+
+while 1:
     init()
-    print ("Key: ", event.char)
-    key_press = event.char
+    key_press = sys.stdin.read(1)
     sleep_time = 0.030
-
     if key_press == 'w':
         forward(sleep_time)
     elif key_press == 's':
@@ -98,10 +99,5 @@ def control_rover(event):
         pivot_left(sleep_time)
     else:
         gpio.cleanup()
-
-key_press = ''
-command = tk.Tk()
-command.bind('<KeyPress>', control_rover)
-command.mainloop()
-    
+        break
     
