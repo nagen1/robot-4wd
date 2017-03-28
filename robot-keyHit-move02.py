@@ -77,27 +77,31 @@ def pivot_right(tf):
     gpio.cleanup()
     
 
-curses.initscr()
-key_press = ''
-#sleep_time = 0.3
-
-while 1:
-    init()
-    key_press = sys.stdin.read(1)
-    sleep_time = 0.030
-    if key_press == 'w':
-        forward(sleep_time)
-    elif key_press == 's':
-        reverse(sleep_time)
-    elif key_press == 'a':
-        left_turn(sleep_time)
-    elif key_press == 'd':
-        right_turn(sleep_time)
-    elif key_press == 'f':
-        pivot_right(sleep_time)
-    elif key_press == 'l':
-        pivot_left(sleep_time)
-    else:
-        gpio.cleanup()
-        break
+def rover():
+    #clear screen	
+    key_press = ''
+    while 1:
+        init()
+        key_press = sys.stdin.read(1)
+        sleep_time = 0.030
+        if key_press == 'w':
+            forward(sleep_time)
+        elif key_press == 's':
+            reverse(sleep_time)
+        elif key_press == 'a':
+            left_turn(sleep_time)
+        elif key_press == 'd':
+            right_turn(sleep_time)
+        elif key_press == 'f':
+            pivot_right(sleep_time)
+        elif key_press == 'l':
+            pivot_left(sleep_time)
+        else:
+            gpio.cleanup()
+            break
     
+curses.initscr()
+curses.noecho()
+curses.cbreak()
+rover()
+#sleep_time = 0.3
