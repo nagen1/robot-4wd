@@ -1,32 +1,34 @@
 import RPi.GPIO as gpio
 import time
 
-trig = 38
-echo = 40
+centerTrigger = 37
+centerEcho = 38
 
-gpio.setmode(gpio.BOARD)
-gpio.setup(trig, gpio.OUT)
-gpio.output(trig, 0)
+def distance(trigger, echo):
+    gpio.setmode(gpio.BOARD)
+    gpio.setup(trigger, gpio.OUT)
+    gpio.output(trigger, 0)
 
-gpio.setup(echo, gpio.IN)
+    gpio.setup(echo, gpio.IN)
+    time.sleep(0.1)
 
-time.sleep(0.1)
+    print("starting measuring")
 
-print("starting measuring")
+    gpio.output(trigger, 1)
+    time.sleep(0.00001)
+    gpio.output(trigger, 0)
 
-gpio.output(trig, 1)
-time.sleep(0.00001)
-gpio.output(trig, 0)
+    while gpio.input(echo) == 0:
+        start = time.time()
+        pass
+ 
+    while gpio.input(echo) ==1:
+        stop = time.time()
+        pass
 
-while gpio.input(echo) == 0:
-    pass
-start = time.time()
+    result = (stop - start) * 17000
+    print(result)
+    gpio.cleanup() 
 
-while gpio.input(echo) ==1:
-    pass
-stop = time.time()
-
-result = (stop - start) * 17000
-print(result)
-
-gpio.cleanup() 
+while True:
+    distance(centerTrigger, centerEcho)
