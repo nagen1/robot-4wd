@@ -3,6 +3,10 @@ import time
 
 centerTrigger = 37
 centerEcho = 38
+rightTrigger = 35
+rightEcho = 36
+leftTrigger = 33
+leftEcho = 40
 
 def distance(trigger, echo):
     gpio.setmode(gpio.BOARD)
@@ -30,5 +34,6 @@ def distance(trigger, echo):
     print(result)
     gpio.cleanup() 
 
-while True:
-    distance(centerTrigger, centerEcho)
+distance(centerTrigger, centerEcho)
+distance(rightTrigger, rightEcho)
+distance(leftTrigger, leftEcho)
