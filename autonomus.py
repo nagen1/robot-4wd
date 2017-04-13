@@ -120,16 +120,12 @@ try:
         right = distance(rightTrigger, rightEcho)
         center = distance(centerTrigger, centerEcho)
         left = distance(leftTrigger, leftEcho)
-        print("Center:", center, " Light:", right, " Left:", left)
+        print("Center:", center, " Right:", right, " Left:", left)
 
-        if center >= 30:
-            forward(0.3)
-        elif right >=30:
-            pivot_right(0.3)
-        elif left >= 30:
-            pivot_left(0.30)
+        if center < 30 or right < 30 or left < 30:
+            pivot_left(0.5)
         else:
-            back(0.50)
+            forward(0.3)
 
 except KeyboardInterrupt:
     gpio.cleanup()
