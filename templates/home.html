@@ -1,18 +1,69 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
   <html>
     <head>
-      <meta charset="UTF-8">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet">
-      <title>Hi nBot</title>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body>
-      <h6>Hi.... I am nbot<h6>
-      <a href="{{ url_for('home', key=1) }}"><h4>Go Forward</h4><i class="material-icons">keyboard_arrow_right</i></a>
-      <a href="{{ url_for('home', key=3) }}"><h4>Go backward</h4></a>
-      <a href="{{ url_for('home', key=2) }}"><h4>Go left</h4></a>
-      <a href="{{ url_for('home', key=4) }}"><h4>Go right</h4></a>
-      <a href="{{ url_for('home', key=6) }}"><h4>Pivot right</h4></a>
-      <a href="{{ url_for('home', key=5) }}"><h4>Stop</h4></a>
+    <body class="blue-grey darken-3">
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+
+      <nav>
+          <div class="nav-wrapper center white">
+              <a href="#" class="brand-logo black-text">spirit</a>
+          </div>
+      </nav>
+
+      <div class="container center">
+          <div class="row"></div>
+          <div class="row">
+              <div class="col s4"></div>
+              <div class="col s4">
+                  <a href="{{ url_for('home', key=1) }}" class="btn-floating btn-large red"><i class="material-icons">keyboard_arrow_up</i></a>
+              </div>
+              <div class="col s4"></div>
+          </div>
+          <div class="row">
+              <div class="col s4">
+                  <a href="{{ url_for('home', key=2) }}" class="btn-floating btn-large red"><i class="material-icons">keyboard_arrow_left</i></a>
+              </div>
+              <div class="col s4">
+                  <a href="{{ url_for('home', key=5) }}" class="btn-floating btn-large red"><i class="material-icons">stop</i></a>
+              </div>
+              <div class="col s4">
+                  <a href="{{ url_for('home', key=4) }}" class="btn-floating btn-large red"><i class="material-icons">keyboard_arrow_right</i></a>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col s4">
+                  <a href="{{ url_for('home', key=6) }}" class="btn-floating btn-large purple"><i class="material-icons">cached</i></a>
+              </div>
+              <div class="col s4">
+                  <a href="{{ url_for('home', key=3) }}" class="btn-floating btn-large red"><i class="material-icons">keyboard_arrow_down</i></a>
+              </div>
+              <div class="col s4"></div>
+          </div>
+
+
+          <div class="row">
+              <div class="col s4">
+                  <a class="btn-floating btn-large green"><i class="material-icons">toll</i></a>
+              </div>
+              <div class="col s4">
+                  <a class="btn-floating btn-large brown"><i class="material-icons">brush</i></a>
+              </div>
+              <div class="col s4">
+                  <a class="btn-floating btn-large blue"><i class="material-icons">grain</i></a>
+              </div>
+          </div>
+      </div>
+
     </body>
   </html>
