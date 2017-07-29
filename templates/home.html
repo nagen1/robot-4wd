@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet">
+      <title>Hi nBot</title>
+    </head>
+
+    <body>
+      <h6>Hi.... I am nbot<h6>
+      <a href="{{ url_for('home', key=1) }}"><h4>Go Forward</h4><i class="material-icons">keyboard_arrow_right</i></a>
+      <a href="{{ url_for('home', key=3) }}"><h4>Go backward</h4></a>
+      <a href="{{ url_for('home', key=2) }}"><h4>Go left</h4></a>
+      <a href="{{ url_for('home', key=4) }}"><h4>Go right</h4></a>
+      <a href="{{ url_for('home', key=6) }}"><h4>Pivot right</h4></a>
+      <a href="{{ url_for('home', key=5) }}"><h4>Stop</h4></a>
+    </body>
+  </html>
