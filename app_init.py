@@ -1,11 +1,11 @@
 import RPi.GPIO as gpio
 from sense_hat import SenseHat
 import time
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template, url_for, request
 
 app = Flask(__name__)
 #gpio.setmode(gpio.BOARD)
-sense = SenseHat()
+#sense = SenseHat()
 
 def init():
     gpio.setmode(gpio.BOARD)
@@ -14,13 +14,17 @@ def init():
     gpio.setup(10, gpio.OUT)  #input 2
     gpio.setup(12, gpio.OUT)  #input 4   
 
-def text():
+'''def text():
     text_color = (255, 0, 0)
     background = (255, 255, 255)
     speed = 0.25
     message = "Hi"
     sense.show_message(message, speed, text_colour = text_color, back_colour = background)
     sense.clear()
+
+@app.route('/sense')
+def sens():
+    text()    '''
     
 def forward():
     init()
@@ -82,6 +86,15 @@ def home(key=None):
        pivot_right()
 
     return render_template('/home.html')
+
+@app.route('/forward', methods=['GET', 'POST'])
+def forward():
+    fwd = request.get_data()
+
+    if fwd == 'forward':
+        print("moving moving", fwd)
+  
+    return redirect(url_for('home'), code=200)
 
 
 if __name__ == "__main__":
