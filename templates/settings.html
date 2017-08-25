@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<script>
+    $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+<div class="container center">
+    <div class="row">
+        <div class="row">
+
+            {% if results %}
+            <table><tr>
+                {% for key, value in results.items() %}
+                       {% for val in value %}
+                        {% for key, a in val.items() |sort(reverse=True)%}
+                            <td> {{ a }} </td>
+                        {% endfor %}
+                       {% endfor %}
+
+                {% endfor %}
+            </tr></table>
+            {% endif %}
+        </div>
+        <form method="POST" enctype="multipart/form-data" class="col s12">
+          <div class="row">
+            <div class="input-field col s6 l3">
+              <input id="icon_prefix" name="title" type="text" class="validate">
+              <label for="icon_prefix">Name</label>
+            </div>
+            <div class="input-field col s6 l3">
+                    <select name="type">
+                      <option value="" disabled selected>Module</option>
+                      <option value="DC Motors">DC Motors</option>
+                      <option value="Sensor HC SR04">Sensor HC-SR04</option>
+                      <option value="Stepper">Stepper</option>
+                    </select>
+            </div>
+            <div class="input-field col s3 l3">
+              <input id="gpio1" name="gpio1" type="tel" class="validate">
+              <label for="gpio1">gpio1</label>
+            </div>
+            <div class="input-field col s3 l3">
+              <input id="gpio2" name="gpio2" type="tel" class="validate">
+              <label for="gpio2">gpio2</label>
+            </div>
+            <div class="input-field col s3 l3">
+              <input id="gpio3" name="gpio3" type="tel" class="validate">
+              <label for="gpio3">gpio3</label>
+            </div>
+            <div class="input-field col s3 l3">
+              <input id="gpio4" type="tel" name="gpio4" class="validate">
+              <label for="gpio4">gpio4</label>
+            </div>
+            <div class="input-field col s12 l12">
+                <button class="waves-effect waves-light btn grey black-text" type="submit">Save</button>
+            </div>
+          </div>
+        </form>
+  </div>
+</div>
+
+{% endblock %}
