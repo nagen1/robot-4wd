@@ -1,6 +1,7 @@
 import RPi.GPIO as gpio
 from sense_hat import SenseHat
 import time
+import json
 from flask import Flask, redirect, render_template, url_for, request
 
 app = Flask(__name__)
@@ -96,6 +97,35 @@ def forward():
   
     return redirect(url_for('home'), code=200)
 
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    try:
+        with open('data.json') as json_data:
+            data = json.load(json_data)
+    except:
+        data = {}
+
+    if request.method == 'GET':
+        return render_template('/settings.html', results=data)
+
+    elif request.method == 'POST':
+        name = request.form['title']
+        type = request.form['type']
+        gpio1 = request.form['gpio1']
+        gpio2 = request.form['gpio2']
+        gpio3 = request.form['gpio3']
+        gpio4 = request.form['gpio4']
+        data[name] = []
+        data[name].append({"title": name,
+                             "type": type,
+                             "gpio1": gpio1,
+                             "gpio2": gpio2,
+                             "gpio3": gpio3,
+                             "gpio4": gpio4})
+
+        with open('data.json', 'w') as outfile:
+            json.dump(data, outfile)
+        return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5555, debug=True)
