@@ -2,17 +2,18 @@ import RPi.GPIO as gpio
 from sense_hat import SenseHat
 import time
 
-app = Flask(__name__)
-
 # sense = SenseHat()
+dc_motor_IN1 = 35
+dc_motor_IN2 = 36
+dc_motor_IN3 = 37
+dc_motor_IN4 = 38
 
 def init():
     gpio.setmode(gpio.BOARD)
-    gpio.setup(11, gpio.OUT)  # input 3
-    gpio.setup(8, gpio.OUT)  # input 1
-    gpio.setup(10, gpio.OUT)  # input 2
-    gpio.setup(12, gpio.OUT)  # input 4
-
+    gpio.setup(dc_motor_IN1, gpio.OUT)
+    gpio.setup(dc_motor_IN2, gpio.OUT)
+    gpio.setup(dc_motor_IN3, gpio.OUT)
+    gpio.setup(dc_motor_IN4, gpio.OUT)
 
 def text():
     text_color = (255, 0, 0)
@@ -22,46 +23,40 @@ def text():
     sense.show_message(message, speed, text_colour=text_color, back_colour=background)
     sense.clear()
 
-
-def forward():
+def go_forward():
     init()
-    gpio.output(8, True)
-    gpio.output(10, False)
-    gpio.output(11, True)
-    gpio.output(12, False)
-
+    gpio.output(dc_motor_IN1, True)
+    gpio.output(dc_motor_IN2, False)
+    gpio.output(dc_motor_IN3, False)
+    gpio.output(dc_motor_IN4, True)
 
 def backward():
     init()
-    gpio.output(8, False)
-    gpio.output(10, True)
-    gpio.output(11, False)
-    gpio.output(12, True)
-
+    gpio.output(dc_motor_IN1, False)
+    gpio.output(dc_motor_IN2, True)
+    gpio.output(dc_motor_IN3, True)
+    gpio.output(dc_motor_IN4, False)
 
 def right():
     init()
-    gpio.output(8, True)
-    gpio.output(10, False)
-    gpio.output(11, False)
-    gpio.output(12, False)
-
+    gpio.output(dc_motor_IN1, True)
+    gpio.output(dc_motor_IN2, False)
+    gpio.output(dc_motor_IN3, False)
+    gpio.output(dc_motor_IN4, False)
 
 def left():
     init()
-    gpio.output(8, False)
-    gpio.output(10, False)
-    gpio.output(11, True)
-    gpio.output(12, False)
-
+    gpio.output(dc_motor_IN1, False)
+    gpio.output(dc_motor_IN2, False)
+    gpio.output(dc_motor_IN3, False)
+    gpio.output(dc_motor_IN4, True)
 
 def pivot_right():
     init()
-    gpio.output(8, True)
-    gpio.output(10, False)
-    gpio.output(11, False)
-    gpio.output(12, True)
-
+    gpio.output(dc_motor_IN1, True)
+    gpio.output(dc_motor_IN2, False)
+    gpio.output(dc_motor_IN3, True)
+    gpio.output(dc_motor_IN4, False)
 
 def stop():
     gpio.cleanup()

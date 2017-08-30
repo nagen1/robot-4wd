@@ -1,75 +1,23 @@
 import RPi.GPIO as gpio
 from sense_hat import SenseHat
 import time
+import json
 from flask import Flask, redirect, render_template, url_for, request
+from drivers import go_forward, backward, left, right, pivot_right, stop
 
 app = Flask(__name__)
 #gpio.setmode(gpio.BOARD)
 #sense = SenseHat()
 
-def init():
-    gpio.setmode(gpio.BOARD)
-    gpio.setup(11, gpio.OUT)  #input 3
-    gpio.setup(8, gpio.OUT)   #input 1
-    gpio.setup(10, gpio.OUT)  #input 2
-    gpio.setup(12, gpio.OUT)  #input 4   
-
-'''def text():
-    text_color = (255, 0, 0)
-    background = (255, 255, 255)
-    speed = 0.25
-    message = "Hi"
-    sense.show_message(message, speed, text_colour = text_color, back_colour = background)
-    sense.clear()
-
-@app.route('/sense')
-def sens():
-    text()    '''
-    
-def forward():
-    init()
-    gpio.output(8, True)
-    gpio.output(10, False)
-    gpio.output(11, True)
-    gpio.output(12, False)
-
-def backward():
-    init()
-    gpio.output(8, False)
-    gpio.output(10, True)
-    gpio.output(11, False)
-    gpio.output(12, True)
-
-def right():
-    init()
-    gpio.output(8, True)
-    gpio.output(10, False)
-    gpio.output(11, False)
-    gpio.output(12, False)
-
-def left():
-    init()
-    gpio.output(8, False)
-    gpio.output(10, False)
-    gpio.output(11, True)
-    gpio.output(12, False)
-
-def pivot_right():
-    init()
-    gpio.output(8, True)
-    gpio.output(10, False)
-    gpio.output(11, False)
-    gpio.output(12, True)
-
-def stop():
-    gpio.cleanup()
 
 @app.route("/")
 @app.route("/<int:key>")
 def home(key=None):
     stop()    
     if key == 1:
-        forward()
+        stop()
+        go_forward()
+        print("you hit key 1")
     if key == 2:
         stop()
         left()
@@ -89,12 +37,14 @@ def home(key=None):
 
 @app.route('/forward', methods=['GET', 'POST'])
 def forward():
-    fwd = request.get_data()
+    fwd = request.get_data(as_text=True)
+    print(fwd)
 
     if fwd == 'forward':
         print("moving moving", fwd)
+        go_forward()
   
-    return redirect(url_for('home'), code=200)
+    return None
 
 
 if __name__ == "__main__":
