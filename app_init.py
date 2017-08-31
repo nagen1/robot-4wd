@@ -17,7 +17,6 @@ def home(key=None):
     if key == 1:
         stop()
         go_forward()
-        print("you hit key 1")
     if key == 2:
         stop()
         left()
@@ -35,16 +34,27 @@ def home(key=None):
 
     return render_template('/home.html')
 
-@app.route('/forward', methods=['GET', 'POST'])
-def forward():
+@app.route('/ifttt', methods=['GET', 'POST'])
+def ifttt():
     fwd = request.get_data(as_text=True)
     print(fwd)
+    new = fwd.split()
+    print(new[1])
 
-    if fwd == 'forward':
-        print("moving moving", fwd)
+    if new[1] == 'forward':
         go_forward()
+    elif new[1] == 'back' or new[1] == 'backward':
+        backward()
+    elif new[1] == 'right':
+        right()
+    elif new[1] == 'left':
+        left()
+    elif new[1] == 'stop':
+        stop()
+    elif new[1] == 'circle' or new[1] == 'round' or new[1] == 'clock':
+        pivot_right()
   
-    return None
+    return redirect(url_for('home'), code=200)
 
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
@@ -74,7 +84,8 @@ def settings():
 
         with open('data.json', 'w') as outfile:
             json.dump(data, outfile)
-        return redirect(url_for('home'))
+
+        return redirect(url_for('home'), code=302)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5555, debug=True)
