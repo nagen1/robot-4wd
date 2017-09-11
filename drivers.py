@@ -60,3 +60,6 @@ def pivot_right():
 
 def stop():
     gpio.cleanup()
+    
+def servo():
+    # New servo motor functionality need to be added.
