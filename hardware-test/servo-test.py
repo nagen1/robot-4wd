@@ -17,6 +17,7 @@ class App:
          scale.grid(row=0)
     def update(self, angle):
          duty = float(angle) / 10.0 + 2.5
+         print(duty)
          pwm.ChangeDutyCycle(duty)
 
 root = Tk()
