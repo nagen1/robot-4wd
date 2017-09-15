@@ -34,6 +34,8 @@ def home(key=None):
 
     return render_template('/home.html')
 
+# Webhook works with IFTTT and google assistant response message. 
+# once IFTTT funtion gets POST message from google assistant, it acts on the given task.
 @app.route('/ifttt', methods=['GET', 'POST'])
 def ifttt():
     fwd = request.get_data(as_text=True)
@@ -87,5 +89,17 @@ def settings():
 
         return redirect(url_for('home'), code=302)
 
+@app.route('/test')
+def test():
+    try:
+        with open('data.json') as json_data:
+            data = json.load(json_data)
+    except:
+        data = {}
+    keys = data.keys()
+    newstring = data['Sensor']
+    
+    return redirect(url_for('home'))
+                    
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5555, debug=True)

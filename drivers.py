@@ -60,3 +60,8 @@ def pivot_right():
 
 def stop():
     gpio.cleanup()
+    
+def servo():
+    gpio.setmode(gpio.BOARD)
+    gpio.setup(servo, gpio.OUT)
+    # New servo motor functionality need to be added.
