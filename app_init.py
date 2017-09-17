@@ -3,7 +3,7 @@ from sense_hat import SenseHat
 import time
 import json
 from flask import Flask, redirect, render_template, url_for, request
-from drivers import go_forward, backward, left, right, pivot_right, stop
+from drivers import go_forward, backward, left, right, pivot_right, stop, servo
 
 app = Flask(__name__)
 #gpio.setmode(gpio.BOARD)
@@ -13,7 +13,8 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/<int:key>")
 def home(key=None):
-    stop()    
+    servo(0)
+    stop()
     if key == 1:
         stop()
         go_forward()
@@ -31,6 +32,9 @@ def home(key=None):
     if key == 6:
        stop()
        pivot_right()
+    if key == 7:
+        stop()
+        servo(120)
 
     return render_template('/home.html')
 
@@ -55,6 +59,12 @@ def ifttt():
         stop()
     elif new[1] == 'circle' or new[1] == 'round' or new[1] == 'clock':
         pivot_right()
+    elif new[1] == 'clean':
+        servo(120)
+        go_forward()
+    elif new[1] == 'rest':
+        stop()
+        servo(0)
   
     return redirect(url_for('home'), code=200)
 
@@ -103,3 +113,4 @@ def test():
                     
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5555, debug=True)
+
