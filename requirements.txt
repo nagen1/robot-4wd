@@ -47,7 +47,7 @@ rostopic==1.12.7
 rosunit==1.13.5
 roswtf==1.12.7
 RPi.GPIO==0.6.3
-rsa==3.4.2
+rsa==4.1
 RTIMULib==7.2.1
 sense-hat==2.2.0
 six==1.10.0
