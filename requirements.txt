@@ -52,5 +52,5 @@ RTIMULib==7.2.1
 sense-hat==2.2.0
 six==1.10.0
 topic-tools==1.12.7
-urllib3==1.22
+urllib3==1.26.5
 Werkzeug==0.12.2
