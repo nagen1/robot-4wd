@@ -19,7 +19,7 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 message-filters==1.12.7
-numpy==1.13.1
+numpy==1.21.0
 oauthlib==2.0.2
 olefile==0.44
 Pillow==2.9.0
